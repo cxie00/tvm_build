@@ -1,5 +1,5 @@
 # FROM ubuntu:20.04
-FROM nvidia/cuda:11.4.2-devel-ubuntu20.04
+FROM mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.3-cudnn8-ubuntu20.04
 
 RUN apt-get update && apt-get install -y git 
 
@@ -38,7 +38,10 @@ RUN pip3 install --user numpy decorator attrs
 WORKDIR /workspace/tvm/
 RUN mkdir test
 COPY from_onnx.py /workspace/tvm/test/
-ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.4/compat/
+
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.3/compat/
 
 RUN pip3 install onnx pillow matplotlib scipy
 RUN apt-get install vim -y
+
+RUN pip3 install hummingbird-ml onnxruntime==1.9.0 mlflow sklearn
