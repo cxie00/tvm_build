@@ -45,3 +45,5 @@ RUN pip3 install onnx pillow matplotlib scipy
 RUN apt-get install vim -y
 
 RUN pip3 install hummingbird-ml onnxruntime==1.9.0 mlflow sklearn
+COPY mlruns /workspace/tvm/test/
+COPY tvm_onnx.py /workspace/tvm/test/
